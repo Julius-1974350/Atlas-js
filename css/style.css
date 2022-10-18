@@ -1,0 +1,29 @@
+.card {
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.10);
+    color: white;
+    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.container {
+    background-color: aquamarine;
+}
+
+#imgIcon {
+    width: 130px;
+    height: 130px;
+}
+
+#info-planet {
+    text-align: center;
+}
+
+.affinity {
+    width: 50px;
+}
+
+.element {
+    width: 48px;
+}

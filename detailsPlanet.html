@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+        integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/detailsPlanet.js"></script>
+    <title>Détails Planètes</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Détails d'une planètes</h1>
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    <div id="info-planet" class="col-4">
+                        <img id="imgIcon" />
+                        <h2 id="lblName"></h2>
+                    </div>
+                    <div id="detail-planet" class="col-8">
+                        <div class="row">
+                            <label class="col-4" for="lblDiscoveredBy">Découverte par:</label>
+                            <label class="col-8" id="lblDiscoveredBy"></label>
+                        </div>
+                        <div class="row">
+                            <label class="col-4" for="lblDiscoveryDate">Date de découverte:</label>
+                            <label class="col-8" id="lblDiscoveryDate"></label>
+                        </div>
+                        <div class="row">
+                            <label class="col-4" for="lblTemperature">Température:</label>
+                            <label class="col-8" id="lblTemperature"></label>
+                        </div>
+                        <div class="row">
+                            <label class="col-4" for="lblPosition">Position:</label>
+                            <label class="col-8" id="lblPosition"></label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button id="btnMiner" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#extractionModal">Extraction</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row">
+                    <h5>Satellites</h5>
+                </div>
+                <ul class="row" id="satellites">
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <h3 class="col-12">Portals</h3>
+                    <div class="col-8">
+                        <table id="portals" class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Affinity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="row">
+                            Découverte d'un portal
+                        </h5>
+                        <div class="form-group">
+                            <label for="">Position</label>
+                            <input type="text" class="form-control" id="txtPortalPosition" />
+                        </div>
+                        <div class="form-group">
+                            <select name="" id="cboAffinity" class="form-control">
+                                <option>air</option>
+                                <option>darkness</option>
+                                <option>earth</option>
+                                <option>energy</option>
+                                <option>fire</option>
+                                <option>life</option>
+                                <option>light</option>
+                                <option>logic</option>
+                                <option>music</option>
+                                <option>space</option>
+                                <option>toxic</option>
+                                <option>water</option>
+                            </select>
+                        </div>
+                        <button id="btnAddPortal" class="btn btn-primary">Ajouter le portal</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="extractionModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Extraction</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table id="extraction" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Element</th>
+                                    <th>Quantité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
