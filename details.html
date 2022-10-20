@@ -21,97 +21,71 @@
         integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/details.js"></script>
-    <title>Détails Planètes</title>
+    <title>Détails Monstre</title>
 
 </head>
 
 <body>
     <div class="container">
-        <h1>Détails d'une planètes</h1>
         <div class="row">
             <div class="col-9">
                 <div class="row">
-                    <div id="info-planet" class="col-4">
-                        <img id="imgIcon" />
+                    <div id="info-monstre" class="col-4 text-center">
+                        <h1 id="nbMonstre"></h1>
+                        <img id="imgIcon"/>
                         <h2 id="lblName"></h2>
                     </div>
-                    <div id="detail-planet" class="col-8">
-                        <div class="row">
-                            <label class="col-4" for="lblhealth">Health:</label>
-                            <label class="col-8" id="lblhealth"></label>
+                    <div id="detail-monstre" class="col-8 text-end ">
+                        <div class="row align-middle">
+                            <label class="col-4" for="lblHealth">Health:</label>
+                            <label class="col-4" id="lblHealth"></label>
                         </div>
                         <div class="row">
-                            <label class="col-4" for="lblDiscoveryDate">Date de découverte:</label>
-                            <label class="col-8" id="lblDiscoveryDate"></label>
+                            <label class="col-4" for="lblDamage">Damage:</label>
+                            <label class="col-4" id="lblDamage"></label>
                         </div>
                         <div class="row">
-                            <label class="col-4" for="lblTemperature">Température:</label>
-                            <label class="col-8" id="lblTemperature"></label>
+                            <label class="col-4" for="lblSpeed">Température:</label>
+                            <label class="col-4" id="lblSpeed"></label>
                         </div>
                         <div class="row">
-                            <label class="col-4" for="lblPosition">Position:</label>
-                            <label class="col-8" id="lblPosition"></label>
+                            <label class="col-4" for="lblCritical">Critical:</label>
+                            <label class="col-4" id="lblCritical"></label>
                         </div>
                         <div class="row">
-                            <div class="col-12 text-center">
+                            <div class="col-10 text-center">
                                 <button id="btnMiner" type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#extractionModal">Extraction</button>
+                                    data-bs-target="#locations">Locations</button>
+                                    <button id="btnMiner" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#generate">Generate</button>
+                            </div>
+                            <div class="col-12">
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <h5>Satellites</h5>
-                </div>
-                <ul class="row" id="satellites">
-                </ul>
-            </div>
             <div>
                 <div class="row">
-                    <h3 class="col-12">Portals</h3>
                     <div class="col-8">
-                        <table id="portals" class="table">
+                        <table id="monsters" class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Position</th>
                                     <th scope="col">Affinity</th>
+                                    <th scope="col">Health</th>
+                                    <th scope="col">Damage</th>
+                                    <th scope="col">Speed</th>
+                                    <th scope="col">Critical</th>
+                                    <th scope="col">Kernel</th>
+                                    <th scope="col">Hash</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-4">
-                        <h5 class="row">
-                            Découverte d'un portal
-                        </h5>
-                        <div class="form-group">
-                            <label for="">Position</label>
-                            <input type="text" class="form-control" id="txtPortalPosition" />
-                        </div>
-                        <div class="form-group">
-                            <select name="" id="cboAffinity" class="form-control">
-                                <option>air</option>
-                                <option>darkness</option>
-                                <option>earth</option>
-                                <option>energy</option>
-                                <option>fire</option>
-                                <option>life</option>
-                                <option>light</option>
-                                <option>logic</option>
-                                <option>music</option>
-                                <option>space</option>
-                                <option>toxic</option>
-                                <option>water</option>
-                            </select>
-                        </div>
-                        <button id="btnAddPortal" class="btn btn-primary">Ajouter le portal</button>
-                    </div>
                 </div>
-
             </div>
         </div>
         <div class="modal fade" id="extractionModal" tabindex="-1" aria-labelledby="exampleModalLabel"

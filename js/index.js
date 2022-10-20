@@ -11,15 +11,15 @@ async function retrieveMonsters() {
         if (response.status === 200) {
             const monsters = response.data;
             monsters.forEach(m => {
-                $('#monsters tbody').append(displayMonstre(m));
+                $('#monsters tbody').append(displayMonster(m));
             });
         }
     } catch (err) {
-
+        
     }
 }
 
-function displayMonstre(m) {
+function displayMonster(m) {
     let infoMonstre = '<tr>';
     infoMonstre += `<td class="align-middle">${m.atlasNumber}<img class="monstreImg" src="${m.assets}"/></td>`;
     infoMonstre += `<td class="align-middle"><a href="details.html?monster=${m.atlasNumber}">${m.name}</a></td>`;

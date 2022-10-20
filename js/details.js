@@ -39,27 +39,20 @@ async function minePlanet(urlPlanet) {
 
 }
 
-async function retrieveMonsters(atlasNumber) {
+async function retrieveMonsters(urlMonstre) {
     try {
-        const response = await axios.get(atlasNumber);
+        const response = await axios.get(urlMonstre);
         if (response.status === 200) {
             const monster = response.data;
             console.log(monster);
+            $('#nbMonstre').html(monster.atlasNumber);
             $('#imgIcon').attr('src', monster.assets);
             $('#lblName').html(monster.name);
-            $('#lblHealth').html(`[${m.health.min} - ${m.health.max}]`);
-            $('#lblDamage').html(`[${m.damage.min} - ${m.damage.max}]`);
-            $('#lblSpeed').html(`[${m.speed.min} - ${m.speed.max}]`);
-            $('#lblCritical').html(`[${(m.critical.min * 100).toFixed(2)} - ${(m.critical.max * 100).toFixed(2)}]%`);
-            if (planet.satellites.length > 0) {
-                planet.satellites.forEach(s => {
-                    $('#satellites').append(`<li>${s}</li>`);
-                });
-            } else {
-                $('#satellites').append('Aucun satellite');
-            }
-            //Afficher les portals
-            displayPortals(planet.portals);
+            $('#lblHealth').html(`[${monster.health.min} - ${monster.health.max}]`);
+            $('#lblDamage').html(`[${monster.damage.min} - ${monster.damage.max}]`);
+            $('#lblSpeed').html(`[${monster.speed.min} - ${monster.speed.max}]`);
+            $('#lblCritical').html(`[${(monster.critical.min * 100).toFixed(2)} - ${(monster.critical.max * 100).toFixed(2)}]%`);
+            displaySpecimens(monster.specimens);
         }
     } catch (err) {
         console.log(err);
@@ -67,23 +60,43 @@ async function retrieveMonsters(atlasNumber) {
 
 }
 
-function displayPortals(portals) {
-    portals.forEach(p => {
+function retreiveSpecimens(specimens) {
+    specimens.forEach(s => {
         //Créer le html (tr)
-        const infoPortal = displayPortal(p);
+        const infoSpecimen = displaySpecimens(s);
         //Injecter le html
-        $('#portals tbody').append(infoPortal);
+        $('#portals tbody').append(infoSpecimen);
     })
 }
 
-function displayPortal(p) {
-    //Créer le html (tr)
-    let infoPortal = '<tr>';
-    infoPortal += `<td>${p.position}</td>`;
-    infoPortal += `<td><img class="affinity" src="img/${p.affinity}.svg"</td>`;
-    infoPortal += '</tr>';
-    return infoPortal;
+function displaySpecimens(s) {
+    let infoSpecimen = '<tr>';
+    infoSpecimen += `<td class="align-middle"><img class="specimenImg" src="../images/affinities/${s.affinity}.png"/></td>`;
+    infoSpecimen += `<td class="align-middle">${s.health}</td>`;
+    infoSpecimen += `<td class="align-middle">${s.damage}</td>`;
+    infoSpecimen += `<td class="align-middle">${s.speed}</td>`;
+    infoSpecimen += `<td class="align-middle">${s.critical}</td>`;
+    infoSpecimen += `<td class="align-middle">`;
+    s.talents.forEach(t => {
+        infoSpecimen += `<img class="specimenImg" src="../images/affinities/${t}.png"/>`;
+    });
+    infoSpecimen += `</td>`;
+    infoSpecimen += `<td class="align-middle">`;
+    s.kernel.forEach(k => {
+        infoSpecimen += `<img class="specimenImg" src="../images/elements/${k}.png"/>`;
+    });
+    infoSpecimen += `</td>`;
+    infoSpecimen += getHashCode(s.hash);
+    infoSpecimen += '</tr>';
+    return infoSpecimen;
 }
+
+function getHashCode(hash)
+{
+    // to do
+    return hash;
+}
+
 
 async function addPortal() {
     const body = {
