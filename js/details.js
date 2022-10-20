@@ -1,4 +1,4 @@
-const ELEMENT_IMG_URL = 'https://assets.andromia.science/elements';
+const ELEMENT_IMG_URL = "https://api.andromia.science/monsters/atlas/";
 const urlParams = {};
 (window.onpopstate = function () {
     let match;
@@ -13,7 +13,7 @@ const urlParams = {};
 })();
 
 $(document).ready(() => {
-    retrievePlanet(urlParams.planet);
+    retrieveMonsters(ELEMENT_IMG_URL + urlParams.monster);
 
     $('#btnAddPortal').click(() => {
         addPortal();
@@ -39,18 +39,18 @@ async function minePlanet(urlPlanet) {
 
 }
 
-async function retrievePlanet(href) {
+async function retrieveMonsters(atlasNumber) {
     try {
-        const response = await axios.get(href);
+        const response = await axios.get(atlasNumber);
         if (response.status === 200) {
-            const planet = response.data;
-            console.log(planet);
-            $('#imgIcon').attr('src', planet.icon);
-            $('#lblName').html(planet.name);
-            $('#lblDiscoveredBy').html(planet.discoveredBy);
-            $('#lblDiscoveryDate').html(planet.discoveryDate);
-            $('#lblTemperature').html(planet.temperature);
-            $('#lblPosition').html(`(${planet.position.x.toFixed(3)}; ${planet.position.y.toFixed(3)}; ${planet.position.z.toFixed(3)})`);
+            const monster = response.data;
+            console.log(monster);
+            $('#imgIcon').attr('src', monster.assets);
+            $('#lblName').html(monster.name);
+            $('#lblHealth').html(`[${m.health.min} - ${m.health.max}]`);
+            $('#lblDamage').html(`[${m.damage.min} - ${m.damage.max}]`);
+            $('#lblSpeed').html(`[${m.speed.min} - ${m.speed.max}]`);
+            $('#lblCritical').html(`[${(m.critical.min * 100).toFixed(2)} - ${(m.critical.max * 100).toFixed(2)}]%`);
             if (planet.satellites.length > 0) {
                 planet.satellites.forEach(s => {
                     $('#satellites').append(`<li>${s}</li>`);

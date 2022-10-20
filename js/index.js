@@ -1,20 +1,17 @@
-const SERVICE_URL = "https://api.andromia.science/planets";
+const SERVICE_URL = "https://api.andromia.science/monsters/atlas";
 
 $(document).ready(() => {
-    //Appeler lorsque la page a terminé de charger
-    //console.log('Prêt');
-    retrievePlanets();
+    retrieveMonsters();
 
 });
 
-async function retrievePlanets() {
+async function retrieveMonsters() {
     try {
         const response = await axios.get(SERVICE_URL);
-        console.log(response);
         if (response.status === 200) {
-            const planets = response.data;
-            planets.forEach(p => {
-                $('#planets').append(displayPlanet(p));
+            const monsters = response.data;
+            monsters.forEach(m => {
+                $('#monsters tbody').append(displayMonstre(m));
             });
         }
     } catch (err) {
@@ -22,10 +19,14 @@ async function retrievePlanets() {
     }
 }
 
-function displayPlanet(planet) {
-    let tagPlanet = '<div class="card col-2 ms-4 mb-4">';
-    tagPlanet += `<a href="detailsPlanet.html?planet=${planet.href}"><img class="card-img-top" src="${planet.icon}"/></a>`;
-    tagPlanet += `<a href="detailsPlanet.html?planet=${planet.href}"><h5 class="card-title text-center">${planet.name}</h5></a>`;
-    tagPlanet += '</div>';
-    return tagPlanet;
+function displayMonstre(m) {
+    let infoMonstre = '<tr>';
+    infoMonstre += `<td class="align-middle">${m.atlasNumber}<img class="monstreImg" src="${m.assets}"/></td>`;
+    infoMonstre += `<td class="align-middle"><a href="details.html?monster=${m.atlasNumber}">${m.name}</a></td>`;
+    infoMonstre += `<td class="align-middle">[${m.health.min} - ${m.health.max}]</td>`;
+    infoMonstre += `<td class="align-middle">[${m.damage.min} - ${m.damage.max}]</td>`;
+    infoMonstre += `<td class="align-middle">[${m.speed.min} - ${m.speed.max}]</td>`;
+    infoMonstre += `<td class="align-middle">[${(m.critical.min * 100).toFixed(2)} - ${(m.critical.max * 100).toFixed(2)}]%</td>`;
+    infoMonstre += '</tr>';
+    return infoMonstre;
 }
