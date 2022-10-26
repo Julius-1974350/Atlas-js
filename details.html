@@ -32,7 +32,7 @@
                 <div class="row">
                     <div id="info-monstre" class="col-4 text-center">
                         <h1 id="nbMonstre"></h1>
-                        <img id="imgIcon"/>
+                        <img id="imgIcon" />
                         <h2 id="lblName"></h2>
                     </div>
                     <div id="detail-monstre" class="col-8 text-end ">
@@ -54,38 +54,35 @@
                         </div>
                         <div class="row">
                             <div class="col-10 text-center">
-                                <button id="btnMiner" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                <button id="Location" type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#locations">Locations</button>
-                                    <button id="btnMiner" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                <button id="Generate" type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#generate">Generate</button>
                             </div>
                             <div class="col-12">
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
-                <div class="row">
-                    <div class="col-8">
-                        <table id="monsters" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Affinity</th>
-                                    <th scope="col">Health</th>
-                                    <th scope="col">Damage</th>
-                                    <th scope="col">Speed</th>
-                                    <th scope="col">Critical</th>
-                                    <th scope="col">Kernel</th>
-                                    <th scope="col">Hash</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <table id="specimens" class="table text-center table-bordered border-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Affinity</th>
+                            <th scope="col">Health</th>
+                            <th scope="col">Damage</th>
+                            <th scope="col">Speed</th>
+                            <th scope="col">Critical</th>
+                            <th scope="col">Talents</th>
+                            <th scope="col">Kernel</th>
+                            <th scope="col">Hash</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="modal fade" id="extractionModal" tabindex="-1" aria-labelledby="exampleModalLabel"

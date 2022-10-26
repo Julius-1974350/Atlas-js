@@ -1,4 +1,5 @@
 const ELEMENT_IMG_URL = "https://api.andromia.science/monsters/atlas/";
+const CREATE_URL = "https://api.andromia.science/monsters/";
 const urlParams = {};
 (window.onpopstate = function () {
     let match;
@@ -15,26 +16,20 @@ const urlParams = {};
 $(document).ready(() => {
     retrieveMonsters(ELEMENT_IMG_URL + urlParams.monster);
 
-    $('#btnAddPortal').click(() => {
-        addPortal();
+    $('#Generate').click(() => {
+        addSpecimen(CREATE_URL + urlParams.monster);
     })
     $('#btnMiner').click(() => {
         minePlanet(urlParams.planet);
     });
 });
 
-async function minePlanet(urlPlanet) {
-    const miningUrl = `${urlPlanet}/actions?type=mine`;
-    const response = await axios.get(miningUrl);
+async function addSpecimen(urlSpecimen) {
+    const newspecimenUrl = `${urlSpecimen}/actions?type=generate`;
+    const response = await axios.post(newspecimenUrl);
     if (response.status === 200) {
-        const extraction = response.data;
-        $('#extraction tbody').empty();
-        extraction.forEach(e => {
-            let extractionTr = '<tr>';
-            extractionTr += `<td><img class="element" src="${ELEMENT_IMG_URL}/${e.element}.png"/></td><td>${e.quantity}</td>`
-            extractionTr += '</tr>';
-            $('#extraction tbody').append(extractionTr);
-        });
+        const specimen = response.data;
+        displaySpecimen(specimen);
     }
 
 }
@@ -52,7 +47,9 @@ async function retrieveMonsters(urlMonstre) {
             $('#lblDamage').html(`[${monster.damage.min} - ${monster.damage.max}]`);
             $('#lblSpeed').html(`[${monster.speed.min} - ${monster.speed.max}]`);
             $('#lblCritical').html(`[${(monster.critical.min * 100).toFixed(2)} - ${(monster.critical.max * 100).toFixed(2)}]%`);
-            displaySpecimens(monster.specimens);
+            monster.specimens.forEach(s => {
+                $('#specimens tbody').prepend(displaySpecimens(s));
+            });
         }
     } catch (err) {
         console.log(err);
@@ -60,13 +57,9 @@ async function retrieveMonsters(urlMonstre) {
 
 }
 
-function retreiveSpecimens(specimens) {
-    specimens.forEach(s => {
-        //Créer le html (tr)
-        const infoSpecimen = displaySpecimens(s);
-        //Injecter le html
-        $('#portals tbody').append(infoSpecimen);
-    })
+function displaySpecimen(specimen) {
+    const infoSpecimen = displaySpecimens(specimen);
+    $('#specimens tbody').prepend(infoSpecimen);
 }
 
 function displaySpecimens(s) {
@@ -78,23 +71,33 @@ function displaySpecimens(s) {
     infoSpecimen += `<td class="align-middle">${s.critical}</td>`;
     infoSpecimen += `<td class="align-middle">`;
     s.talents.forEach(t => {
-        infoSpecimen += `<img class="specimenImg" src="../images/affinities/${t}.png"/>`;
+        infoSpecimen += `<img class="specimenImg" src="images/affinities/${t}.png"/>`
     });
     infoSpecimen += `</td>`;
     infoSpecimen += `<td class="align-middle">`;
     s.kernel.forEach(k => {
-        infoSpecimen += `<img class="specimenImg" src="../images/elements/${k}.png"/>`;
+        infoSpecimen += `<img class="specimenImg" src="images/elements/${k}.png"/>`
     });
     infoSpecimen += `</td>`;
+    infoSpecimen += `<td class="align-middle">`;
     infoSpecimen += getHashCode(s.hash);
+    infoSpecimen += `</td>`;
     infoSpecimen += '</tr>';
     return infoSpecimen;
 }
 
-function getHashCode(hash)
-{
-    // to do
-    return hash;
+function getHashCode(hash) {
+    let infohash = `<div class="colored-hash">`;
+    let separerinfohash = hash.substring(2, hash.length - 2);
+    infohash += hash.substring(0, 2);
+    for (let i = 0; i < separerinfohash.length; i++) {
+        if (i % 6 == 0 && i != 0) {
+            infohash += `<span class="block" style="color:#${hash.substring(i - 6, i)}; background-color:#${hash.substring(i - 6, i)}">${hash.substring(i - 6, i)}</span>`
+        }
+    }
+    infohash += hash.substring(hash.length - 2, hash.length);
+    infohash += `</div>`;
+    return infohash;
 }
 
 
