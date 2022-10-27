@@ -19,17 +19,56 @@ $(document).ready(() => {
     $('#Generate').click(() => {
         addSpecimen(CREATE_URL + urlParams.monster);
     })
-    $('#btnMiner').click(() => {
-        minePlanet(urlParams.planet);
+    $('#Location').click(() => {
+        locationSpecimens(ELEMENT_IMG_URL + urlParams.monster);
+
+    });
+    $('#add').click(() => {
+        addLocation(ELEMENT_IMG_URL + urlParams.monster);
     });
 });
 
 async function addSpecimen(urlSpecimen) {
     const newspecimenUrl = `${urlSpecimen}/actions?type=generate`;
     const response = await axios.post(newspecimenUrl);
-    if (response.status === 200) {
+    if (response.status === 201) {
         const specimen = response.data;
         displaySpecimen(specimen);
+    }
+
+}
+
+async function addLocation(urlLocation) {
+    const body = {
+        position: $('#txtPosition').val(),
+        time: $('#time').val(),
+        season: $('#season').val(),
+        rates: $('#rate').val()
+    };
+    const URL = `${urlLocation}/locations`;
+    try {
+        const responses = await axios.post(URL, body);
+        console.log(responses);
+        if (responses.status === 201) {
+            const infoLocation = displayLocation(responses.data);
+            $('#location tbody').append(infoLocation);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+async function locationSpecimens(urlLocation) {
+    const URL = `${urlLocation}`;
+    try {
+        const responses = await axios.get(URL);
+        console.log(responses);
+        if (responses.status === 200) {
+            const infoLocation = displayLocations(responses);
+            $('#location tbody').prepend(infoLocation);
+        }
+    } catch (err) {
+        console.log(err);
     }
 
 }
@@ -85,6 +124,26 @@ function displaySpecimens(s) {
     infoSpecimen += '</tr>';
     return infoSpecimen;
 }
+function displayLocation(l) {
+    let infoLocation = '<tr>';
+    infoLocation += `<td class="align-middle">${l.position}</td>`;
+    infoLocation += `<td class="align-middle">${l.time}</td>`;
+    infoLocation += `<td class="align-middle"><img class="locationImg" src="../images/seasons/${l.season}.png"/></td>`;
+    infoLocation += `<td class="align-middle"><img class="locationImg" src="../images/rarities/${l.rates}.png"/></td>`;
+    infoLocation += '<tr>';
+    return infoLocation;
+}
+function displayLocations(response) {
+    let infoLocation = '<tr>';
+    response.data.locations.forEach(l => {
+        infoLocation += `<td class="align-middle">${l.position}</td>`;
+        infoLocation += `<td class="align-middle">${l.time}</td>`;
+        infoLocation += `<td class="align-middle"><img class="locationImg" src="../images/seasons/${l.season}.png"/></td>`;
+        infoLocation += `<td class="align-middle"><img class="locationImg" src="../images/rarities/${l.rates}.png"/></td>`;
+        infoLocation += '<tr>';
+    });
+    return infoLocation;
+}
 
 function getHashCode(hash) {
     let infohash = `<div class="colored-hash">`;
@@ -101,21 +160,3 @@ function getHashCode(hash) {
 }
 
 
-async function addPortal() {
-    const body = {
-        position: $('#txtPortalPosition').val(),
-        affinity: $('#cboAffinity').val()
-    };
-
-    const URL = `${urlParams.planet}/portals`;
-    try {
-        const responses = await axios.post(URL, body);
-        if (responses.status === 201) {
-            const infoPortal = displayPortal(responses.data);
-            $('#portals tbody').prepend(infoPortal);
-        }
-    } catch (err) {
-        console.log(err);
-    }
-
-}

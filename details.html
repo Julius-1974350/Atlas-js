@@ -55,9 +55,8 @@
                         <div class="row">
                             <div class="col-10 text-center">
                                 <button id="Location" type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#locations">Locations</button>
-                                <button id="Generate" type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#generate">Generate</button>
+                                    data-bs-target="#locationModal">Locations</button>
+                                <button id="Generate" type="button" class="btn btn-success">Generate</button>
                             </div>
                             <div class="col-12">
 
@@ -85,28 +84,50 @@
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="extractionModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
+        <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Extraction</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Location</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <table id="extraction" class="table">
+                        <table id="location" class="table">
                             <thead>
                                 <tr>
-                                    <th>Element</th>
-                                    <th>Quantité</th>
+                                    <th>Position</th>
+                                    <th>Time</th>
+                                    <th>Season</th>
+                                    <th>Rates</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
+                        <div class="row">
+                            <input class="col-3" type="text" id="txtPosition" />
+                            <select class="col-2" id="time">
+                                <option value="Morning">Morning</option>
+                                <option value="Day">Day</option>
+                                <option value="Night">Night</option>
+                            </select>
+                            <select class="col-2" id="season">
+                                <option value="Autumn">Autumn</option>
+                                <option value="Winter">Winter</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Spring">Spring</option>
+                            </select>
+                            <select class="col-2" id="rate">
+                                <option value="Common">Common</option>
+                                <option value="Limited">Limited</option>
+                                <option value="Rare">Rare</option>
+                                <option value="Uncommon">Uncommon</option>
+                            </select>
+                            <button class="col-2" id="add" class="btn btn-secondary">Add</button>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
