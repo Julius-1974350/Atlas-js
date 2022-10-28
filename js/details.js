@@ -1,4 +1,4 @@
-const ELEMENT_IMG_URL = "https://api.andromia.science/monsters/atlas/";
+const SERVICE_URL = "https://api.andromia.science/monsters/atlas/";
 const CREATE_URL = "https://api.andromia.science/monsters/";
 const urlParams = {};
 (window.onpopstate = function () {
@@ -14,17 +14,17 @@ const urlParams = {};
 })();
 
 $(document).ready(() => {
-    retrieveMonsters(ELEMENT_IMG_URL + urlParams.monster);
+    retrieveMonsters(SERVICE_URL + urlParams.monster);
 
     $('#Generate').click(() => {
         addSpecimen(CREATE_URL + urlParams.monster);
     })
     $('#Location').click(() => {
-        locationSpecimens(ELEMENT_IMG_URL + urlParams.monster);
+        locationSpecimens(SERVICE_URL + urlParams.monster);
 
     });
     $('#add').click(() => {
-        addLocation(ELEMENT_IMG_URL + urlParams.monster);
+        addLocation(SERVICE_URL + urlParams.monster);
     });
 });
 
