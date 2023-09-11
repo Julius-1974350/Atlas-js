@@ -1,1 +1,2 @@
-Julius Leblanc 1974350
+#Atlas
+More learning how to code in js and doing a server using node.
